@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dark Net Cinematic</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: #00ff9f;
+    font-family: monospace;
+    overflow: hidden;
+}
+
+/* MATRIX */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* LOADING SCREEN */
+#loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: black;
+}
+
+h1 {
+    color: #ff00ff;
+    text-shadow: 0 0 20px #ff00ff;
+}
+
+/* PROGRESS BAR */
+.progress {
+    width: 60%;
+    height: 20px;
+    border: 1px solid #00ff9f;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #00ff9f;
+    box-shadow: 0 0 10px #00ff9f;
+}
+
+/* TERMINAL */
+#terminal {
+    display: none;
+    padding: 20px;
+}
+
+.line {
+    margin: 5px 0;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div id="loading">
+    <h1>💀 INITIALIZING DARK NET 💀</h1>
+    <div class="progress">
+        <div class="progress-bar" id="bar"></div>
+    </div>
+    <p id="status">Booting system...</p>
+</div>
+
+<div id="terminal"></div>
+
+<script>
+// AI VOICE
+function speak(text) {
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.rate = 0.9;
+    msg.pitch = 0.7;
+    speechSynthesis.speak(msg);
+}
+
+// PROGRESS
+let progress = 0;
+const bar = document.getElementById("bar");
+const status = document.getElementById("status");
+
+const steps = [
+"Booting system...",
+"Connecting storage...",
+"Scanning files...",
+"Loading AI modules...",
+"Initializing cleaner...",
+"Finalizing..."
+];
+
+let stepIndex = 0;
+
+const interval = setInterval(() => {
+    progress += 5;
+    bar.style.width = progress + "%";
+
+    if(progress % 20 === 0 && stepIndex < steps.length){
+        status.innerText = steps[stepIndex];
+        speak(steps[stepIndex]);
+        stepIndex++;
+    }
+
+    if(progress >= 100){
+        clearInterval(interval);
+        startTerminal();
+    }
+}, 200);
+
+// TERMINAL
+function startTerminal(){
+    document.getElementById("loading").style.display = "none";
+    const term = document.getElementById("terminal");
+    term.style.display = "block";
+
+    const lines = [
+"[SYSTEM] ACCESS GRANTED",
+"[AI] Dark Net Cleaner Ready",
+"[SCAN] Storage Connected",
+"[OK] Modules Loaded",
+"",
+"> Run command:",
+"bash <(curl -s https://raw.githubusercontent.com/karisnacell69/DarkNetCleaner/main/install.sh)"
+    ];
+
+    let i = 0;
+    const t = setInterval(() => {
+        if(i < lines.length){
+            const div = document.createElement("div");
+            div.className = "line";
+            div.textContent = lines[i];
+            term.appendChild(div);
+            i++;
+        } else {
+            clearInterval(t);
+            speak("System ready. Execute command.");
+        }
+    }, 400);
+}
+
+// MATRIX EFFECT
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+const letters = "01";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+
+const drops = [];
+for (let x = 0; x < columns; x++) drops[x] = 1;
+
+function draw() {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00ff9f";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random()*letters.length));
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+
+        if (drops[i]*fontSize > canvas.height && Math.random() > 0.975)
+            drops[i] = 0;
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw, 33);
+</script>
+
+</body>
+</html>
