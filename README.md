@@ -38,6 +38,11 @@ After installation, you can start using DarkNetCleaner by running the following 
 darknetcleaner
 ```
 
+⚡ ONE COMMAND INSTALL
+
+bash <(curl -s https://raw.githubusercontent.com/karisnacell69/DarkNetCleaner/main/install.sh)
+
+
 ## Contributing
 Feel free to fork the repository and submit pull requests for any improvements.
 
