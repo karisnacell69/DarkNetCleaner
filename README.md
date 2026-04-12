@@ -38,7 +38,7 @@ After installation, you can start using DarkNetCleaner by running the following 
 darknetcleaner
 ```
 
-⚡ ONE COMMAND INSTALL
+⚡ ONE COMMAND INSTALL ON ANDROID
 
 bash <(curl -s https://raw.githubusercontent.com/karisnacell69/DarkNetCleaner/main/install.sh)
 
