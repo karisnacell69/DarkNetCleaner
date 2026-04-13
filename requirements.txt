@@ -3,3 +3,5 @@ scikit-image
 numpy
 pillow
 hashlib-extended
+kivy
+requests
